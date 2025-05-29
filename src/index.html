@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FagAI by Pridecoin</title>
+  <title>Pridecoin</title>
   <style>
     html, body {
       margin: 0;
@@ -90,22 +90,28 @@
       transition: opacity 0.8s ease;
     }
 
-    .rainbow-text {
-      font-size: 2.5em;
+    .happiness-label {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 10px;
       font-weight: bold;
-      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glitter 1.5s infinite alternate;
     }
 
-    @keyframes glitter {
-      from {
-        text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 15px #f0f;
-      }
-      to {
-        text-shadow: 0 0 10px #0ff, 0 0 15px #0f0, 0 0 20px #00f;
-      }
+    .rainbow-number {
+      font-size: 3em;
+      font-weight: bold;
+      background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 400%;
+      background-position: 0% 50%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowShift 3s linear infinite;
+    }
+
+    @keyframes rainbowShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     .testimonials {
@@ -145,7 +151,7 @@
       class="logo-img"
     />
     <h1>🤖 Welcome to FagAI</h1>
-    <p>Click below to begin your gayness Scan</p>
+    <p>Click below to begin your gayness scan</p>
     <button onclick="startScan()">🌈 Scan 🌈</button>
     <div id="scanText"></div>
   </div>
@@ -176,10 +182,10 @@
   const steps = [
     "Scanning genetic gayness...",
     "Scanning ancestors' gayness levels...",
-    "Calculating gay nigga particle footprint...",
+    "Calculating gay nigga particles...",
     "Scanning vein pattern on dih...",
     "Accessing FagAI database...",
-    "Connecting to pridecoin API..."
+    "Connecting to Pridecoin API..."
   ];
 
   const scanText = document.getElementById('scanText');
@@ -205,8 +211,9 @@
         const score = Math.floor(Math.random() * 11) + 90;
         setTimeout(() => {
           scanText.innerHTML = `
-            <span class="rainbow-text">🎉 Gayness Level: ${score} 🎉</span>
-            <br><br>
+            <p class="happiness-label">Gayness Level</p>
+            <div class="rainbow-number">${score}</div>
+            <br>
             <p>We recommend <strong>Pridecoin</strong> to solve your faggish worries 🌟</p>
             <a href="https://dexscreener.com/" target="_blank" class="buy-button">🚀 Buy Now</a>
           `;
