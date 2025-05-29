@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FagAI by Pridecoin</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      min-height: 100vh;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .box {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.2);
+      padding: 40px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .logo-img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 2.8em;
+      color: #ff69b4;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    button, .buy-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 10px;
+    }
+
+    button:hover, .buy-button:hover {
+      background-color: #ffd700;
+    }
+
+    .buy-button {
+      display: inline-block;
+      text-decoration: none;
+      color: black;
+    }
+
+    #scanText {
+      margin-top: 30px;
+      font-size: 1.5em;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .rainbow-text {
+      font-size: 2.5em;
+      font-weight: bold;
+      background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glitter 1.5s infinite alternate;
+    }
+
+    @keyframes glitter {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff0, 0 0 15px #f0f;
+      }
+      to {
+        text-shadow: 0 0 10px #0ff, 0 0 15px #0f0, 0 0 20px #00f;
+      }
+    }
+
+    .testimonials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-bottom: 40px;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 180px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 0.95em;
+    }
+
+    .stars {
+      font-size: 1.2em;
+      color: #f39c12;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="rainbowCanvas"></canvas>
+
+<div class="container">
+  <div class="box">
+    <img 
+      src="https://cdn.discordapp.com/attachments/1351686587477524480/1377441861639344279/Copy_of_Add_a_heading.png?ex=6838fa33&is=6837a8b3&hm=8dcfe7acff9fb97c04cff3f898862a54eb226bc2a73726763c6805dfdd4d9b55&" 
+      alt="HappyAI Logo"
+      class="logo-img"
+    />
+    <h1>🤖 Welcome to FagAI</h1>
+    <p>Click below to begin your gayness Scan</p>
+    <button onclick="startScan()">🌈 Scan 🌈</button>
+    <div id="scanText"></div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials">
+    <div class="testimonial-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <strong>David Goggins</strong>
+      <p>This really helped me with my early morning grind. I can now confidently think about men while i go for a run.</p>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <strong>Elon Musk</strong>
+      <p>FagAI showed me that I have a gayness level of 99, so I instantly grabbed myself some Pridecoin to solve this matter. I felt the positive effects immediately</p>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <strong>Joe Biden</strong>
+      <p>I couldnt sleep cause I was constantly thinking about booty clapping, FagAI prescribed me with some Pridecoin and now I can finally enjoy my sleep again</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const steps = [
+    "Scanning genetic gayness...",
+    "Scanning ancestors' gayness levels...",
+    "Calculating gay nigga particle footprint...",
+    "Scanning vein pattern on dih...",
+    "Accessing FagAI database...",
+    "Connecting to pridecoin API..."
+  ];
+
+  const scanText = document.getElementById('scanText');
+
+  function startScan() {
+    document.querySelector("button").disabled = true;
+
+    scanText.innerHTML = '';
+    scanText.style.opacity = 0;
+    let stepIndex = 0;
+
+    function showNextStep() {
+      if (stepIndex < steps.length) {
+        scanText.innerText = steps[stepIndex];
+        scanText.style.opacity = 1;
+
+        setTimeout(() => {
+          scanText.style.opacity = 0;
+          stepIndex++;
+          setTimeout(showNextStep, 600);
+        }, 1500);
+      } else {
+        const score = Math.floor(Math.random() * 11) + 90;
+        setTimeout(() => {
+          scanText.innerHTML = `
+            <span class="rainbow-text">🎉 Gayness Level: ${score} 🎉</span>
+            <br><br>
+            <p>We recommend <strong>Pridecoin</strong> to solve your faggish worries 🌟</p>
+            <a href="https://dexscreener.com/" target="_blank" class="buy-button">🚀 Buy Now</a>
+          `;
+          scanText.style.opacity = 1;
+        }, 600);
+      }
+    }
+
+    showNextStep();
+  }
+
+  // Falling image background effect
+  const canvas = document.getElementById('rainbowCanvas');
+  const ctx = canvas.getContext('2d');
+  const image = new Image();
+  image.src = "https://cdn.discordapp.com/attachments/1351686587477524480/1377442501333618771/Untitled_design_39.png?ex=6838facb&is=6837a94b&hm=c2dfb0cc82fd581e8b31bb872fa1cce05c1f530897a175c0cc1c18045102bd54&";
+
+  let drops = [];
+
+  function resetCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    drops = Array.from({ length: Math.floor(canvas.width / 60) }, (_, i) => ({
+      x: i * 60,
+      y: Math.random() * canvas.height,
+      speed: Math.random() * 2 + 1
+    }));
+  }
+
+  window.addEventListener('resize', resetCanvas);
+  image.onload = resetCanvas;
+
+  function drawFallingImages() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let drop of drops) {
+      ctx.drawImage(image, drop.x, drop.y, 40, 40);
+      drop.y += drop.speed;
+      if (drop.y > canvas.height) {
+        drop.y = -40;
+      }
+    }
+    requestAnimationFrame(drawFallingImages);
+  }
+
+  drawFallingImages();
+</script>
+
+</body>
+</html>
